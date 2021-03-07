@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> HELLO </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <style type="text/css">
+        input {
+            margin-top: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1> WEBSOCKET </h1>
+</body>
+<div style="height: 100vh" class="d-flex justify-content-center align-items-center">
+    <form method="post" action="{% url "room" %}">
+        {% csrf_token %}
+        <input placeholder="Enter room no" class="form-control" type="text" name="room_no">
+        <input placeholder="Enter name" class="form-control" type="text" name="name">
+        <div class="d-flex justify-content-center">
+            <input value="Enter room" class="btn btn-primary" type="submit" name="">
+        </div>
+    </form>
+</div>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> HELLO </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div style=" position: relative; height : 100vh; width: 100vw"
+        class="d-flex justify-content-center alig-items-center">
+        <h1 style="top: 0; position:absolute;"> Welcome to room no <span> style="color: #0079E5">{{room_no}}<span></h1>
+        <div class="container"> </div>
+    </div>
+
+    <div id="messagescontainer" style="overflow-y: auto; width: 40vw;height: 80vh ; position:relative"
+        class="container">
+        <div id="lefttext">hello !</div>
+        <br>
+        <br>
+        <div id="lefttext">hello !</div>
+
+    </div>
+
+    <div style="position:absolute;bottom: 20px; width:100vw" class="d-flex justify-content-center">
+        <input class="form-control" style="text-align: center; width: 40px;" type="text" name="">
+        <input id="sendbutton" class="btn btn-primary value=" send" type="submit" name="">
+    </div>
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+    const chatSocket = new WebSocket('ws://' + windows.location.host + '/ws/chat/<{{int:room_name}}/')
+    document.querySelector('#sendbutton').onclick = function (e) {
+        const message = document.querySelector('#messageinputfield').value
+        chatSocket.send(JSON.stringify({ 'message': '{{name}}: ' + message }));
+        document.querySelector('#messageinputfield').value = '';
+    }
+
+    document.querySelector('#messageinputfield').onkeyup = function (e) {
+        if (e.keyCode == 13) {
+            document.querySelector('#sendbutton').click();
+        }
+    }
+
+    chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        document.querySelector('#messagescontainer').innerHTML += '<div id = "leftext">' + data.message + '</div>' + '<br><br>'
+    }
+
+
+</script>
